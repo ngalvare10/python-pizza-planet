@@ -1,7 +1,7 @@
 install-requirements:
 	pip install -r requirements.txt
 
-start-database:
+init-database:
 	python3 manage.py db init 
 	python3 manage.py db migrate
 	python3 manage.py db upgrade
@@ -16,5 +16,9 @@ run-formatter:
 run-linters:
 	flake8 app/ manage.py
 
-pytest:
-	pytest -v app/test
+run-test:
+	coverage run -m pytest -v app/test
+
+run-coverage-report:
+	coverage report -m --omit=app/test/*
+
