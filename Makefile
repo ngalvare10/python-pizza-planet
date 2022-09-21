@@ -16,9 +16,5 @@ run-formatter:
 run-linters:
 	flake8 app/ manage.py
 
-run-test:
-	coverage run -m pytest -v app/test
-
-run-coverage-report:
-	coverage report -m --omit=app/test/*
-
+run-test-coverage:
+	pytest --cov-config=.coveragerc --cov=app app/test/
