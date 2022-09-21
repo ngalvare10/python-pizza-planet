@@ -1,17 +1,19 @@
 import pytest
 from app.controllers import (IngredientController, OrderController,
-                             SizeController)
+                             SizeController, BeverageController)
 from app.controllers.base import BaseController
 from app.test.utils.functions import get_random_choice, shuffle_list
 
 
-def __order(ingredients: list, size: dict, client_data: dict):
+def __order(ingredients: list, size: dict, beverages: list,client_data: dict):
     ingredients = [ingredient.get('_id') for ingredient in ingredients]
+    beverages = [beverage.get('_id') for beverage in beverages]
     size_id = size.get('_id')
     return {
         **client_data,
         'ingredients': ingredients,
-        'size_id': size_id
+        'size_id': size_id,
+        'beverages': beverages
     }
 
 
