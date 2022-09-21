@@ -19,8 +19,16 @@ jobs:
       - name: Install requirements
         run: make install-requirements
 
+      - name: Run Test Coverage Report
+        run: make run-test-coverage
+
+      - name: Post comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token}}
+          GITHUB_PR_RUN_ID: ${{ github.event.workflow_run.id }}  
+
       - name: Run formatter check
         run: make run-linters
+      
 
-      - name: Run Test
-        run: make pytest
