@@ -17,15 +17,16 @@ class OrderController(BaseController):
 
     @staticmethod
     def calculate_order_price(cls,
-            size_price: float,
-            ingredients: list,
-            beverages: list):
-        price = cls.sum_items_price(ingredients) + cls.sum_items_price(beverages)
+                              size_price: float,
+                              ingredients: list,
+                              beverages: list):
+        price = cls.sum_items_price(ingredients) + \
+            cls.sum_items_price(beverages)
         return round(price + size_price, 2)
 
     @staticmethod
     def sum_items_price(items: list):
-        return sum(item.price for item in items) 
+        return sum(item.price for item in items)
 
     @classmethod
     def create(cls, order: dict):
