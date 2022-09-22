@@ -57,6 +57,19 @@ def test_create(app, ingredients, beverages, size, client_data):
         pytest.assume(not beverages_in_detail.difference(beverage_ids))
 
 
+def test_payload(app, ingredients, beverages, size, client_data):
+    ingredients = [ingredient.get('_id') for ingredient in ingredients]
+    beverages = [beverage.get('_id') for beverage in beverages]
+    order = {
+        **client_data,
+        'ingredients': ingredients,
+        'size_id': '',
+        'beverages': beverages
+    }
+    created_order, error = OrderController.create(order)
+    pytest.assume(created_order == 'Invalid order payload')
+
+
 
 def test_calculate_order_price(app, ingredients,beverages, size, client_data):
     created_size, created_ingredients,created_beverages = __create_sizes_and_ingredients_beverages(ingredients, 

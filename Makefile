@@ -17,7 +17,7 @@ run-linters:
 	flake8 app/ manage.py
 
 run-test-coverage:
-	pytest --cov-config=.coveragerc --cov=app app/test/
+	pytest --cov-report term-missing --cov=app app/test/
 
 fixtures:
 	pytest --fixtures app/test

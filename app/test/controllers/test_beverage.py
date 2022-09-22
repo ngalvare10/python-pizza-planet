@@ -14,8 +14,8 @@ def test_create(app, beverage: dict):
 def test_update(app, beverage: dict):
     created_beverage, _ = BeverageController.create(beverage)
     updated_fields = {
-        'name': 'updated',
-        'price': 10
+        'name': 'updated Beverage',
+        'price': 8
     }
     updated_beverage, error = BeverageController.update({
         '_id': created_beverage['_id'],
