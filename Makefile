@@ -18,3 +18,6 @@ run-linters:
 
 run-test-coverage:
 	pytest --cov-config=.coveragerc --cov=app app/test/
+
+fixtures:
+	pytest --fixtures app/test
