@@ -2,7 +2,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from ..common.utils import check_required_keys
 from ..repositories.managers import (IngredientManager, OrderManager,
-                                     SizeManager,BeverageManager)
+                                     SizeManager, BeverageManager)
 from .base import BaseController
 
 
@@ -20,7 +20,8 @@ class OrderController(BaseController):
             size_price: float,
             ingredients: list,
             beverages: list):
-        price = sum(ingredient.price for ingredient in ingredients)+ sum(beverage.price for beverage in beverages)
+        price = sum(ingredient.price for ingredient in ingredients) + \
+            sum(beverage.price for beverage in beverages)
         return round(price + size_price, 2)
 
     @classmethod

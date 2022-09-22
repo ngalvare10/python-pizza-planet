@@ -4,4 +4,3 @@ from .base import BaseController
 
 class BeverageController(BaseController):
     manager = BeverageManager
-    
