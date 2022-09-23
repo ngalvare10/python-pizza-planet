@@ -21,3 +21,9 @@ run-test-coverage:
 
 fixtures:
 	pytest --fixtures app/test
+
+seed-database-list:
+	python3 manage.py seed list
+
+seed-database:
+	python3 manage.py seed run
