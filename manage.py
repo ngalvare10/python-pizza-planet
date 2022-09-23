@@ -6,8 +6,9 @@ from flask_migrate import Migrate
 
 from app import flask_app
 from app.plugins import db
+from flask_seeder import FlaskSeeder
 # flake8: noqa
-from app.repositories.models import Ingredient, Order, OrderDetail, Size
+from app.repositories.models import Ingredient, Order, OrderDetail, Size, Beverage
 
 
 manager = FlaskGroup(flask_app)
@@ -15,6 +16,8 @@ manager = FlaskGroup(flask_app)
 migrate = Migrate()
 migrate.init_app(flask_app, db)
 
+seeder = FlaskSeeder()
+seeder.init_app(flask_app, db)
 
 @manager.command('test', with_appcontext=False)
 def test():
