@@ -1,8 +1,9 @@
-from app.common.http_methods import GET, POST
-from flask import Blueprint, jsonify, request
+from app.common.http_methods import GET
+from flask import Blueprint, jsonify
 
 from ..controllers import OrderController
-from app.utils.report_utils import most_revenued_month,most_request_ingredient,better_customers
+from app.utils.report_utils import (most_revenued_month,
+                                    most_request_ingredient, better_customers)
 
 
 report = Blueprint('report', __name__)
