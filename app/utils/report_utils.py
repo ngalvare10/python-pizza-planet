@@ -2,24 +2,26 @@
 
 def most_request_ingredient(orders):
         dicc = {}
-        for a in orders[0]:
-            ls = a.pop('detail', [])
-            for i in ls:
-                ingredient = i.get("ingredient").get("name")
-                if ingredient not in dicc.keys():
-                    dicc[ingredient] = 1
-                else:
-                    dicc[ingredient] = dicc[ingredient] + 1
-        sort_ingredients = sorted(dicc.items(), key=lambda x: x[1], reverse=True)
-        return dict([sort_ingredients[0]]), None   
-
+        for order in orders[0]:
+            ingredients = order.pop('detail', [])
+            if len(ingredients) == 0:
+                return "No ingredients in orders", None 
+            else:
+                for ingredient in ingredients:
+                    ingredient = ingredient.get("ingredient").get("name")
+                    if ingredient not in dicc.keys():
+                        dicc[ingredient] = 1
+                    else:
+                        dicc[ingredient] = dicc[ingredient] + 1                
+                sort_ingredients = sorted(dicc.items(), key=lambda x: x[1], reverse=True)
+                return dict([sort_ingredients[0]]), None
 
 def most_revenued_month(orders):
         dicc = {}
-        for a in orders[0]:
-            date = a.pop('date', [])
+        for order in orders[0]:
+            date = order.pop('date', [])
             date = date.split('-')[1]
-            total_price = a.pop('total_price', [])
+            total_price = order.pop('total_price', [])
             if date not in dicc.keys():
                 dicc[date] = total_price
             else:
@@ -29,10 +31,10 @@ def most_revenued_month(orders):
 
 def better_customers(orders):
         dicc = {}
-        for a in orders[0]:
-            client_dni = a.pop('client_dni', [])
-            client_name = a.pop('client_name', [])
-            total_price = a.pop('total_price', [])
+        for order in orders[0]:
+            client_dni = order.pop('client_dni', [])
+            client_name = order.pop('client_name', [])
+            total_price = order.pop('total_price', [])
             if client_dni not in dicc.keys():
                 dicc[client_dni] = [client_name, total_price]
             else:
