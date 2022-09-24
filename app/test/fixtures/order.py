@@ -24,13 +24,15 @@ def client_data():
 
 
 @pytest.fixture
-def order(create_ingredients, create_size, client_data) -> dict:
+def order(create_ingredients, create_size,create_beverages, client_data) -> dict:
     ingredients = [ingredient.get('_id') for ingredient in create_ingredients]
+    beverages = [beverage.get('_id') for beverage in create_beverages]
     size_id = create_size.get('_id')
     return {
         **client_data_mock(),
         'ingredients': ingredients,
-        'size_id': size_id
+        'size_id': size_id,
+        'beverages': beverages
     }
 
 
