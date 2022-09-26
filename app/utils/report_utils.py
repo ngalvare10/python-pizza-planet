@@ -2,11 +2,10 @@
 
 def most_request_ingredient(orders):
     dicc = {}
+    sort_ingredients = {}
     for order in orders[0]:
         ingredients = order.pop('detail', [])
-        if len(ingredients) == 0:
-            return "No ingredients in orders", None
-        else:
+        if len(ingredients) != 0:
             for ingredient in ingredients:
                 ingredient = ingredient.get("ingredient").get("name")
                 if ingredient not in dicc.keys():
@@ -15,21 +14,27 @@ def most_request_ingredient(orders):
                     dicc[ingredient] = dicc[ingredient] + 1
             sort_ingredients = sorted(
                 dicc.items(), key=lambda x: x[1], reverse=True)
-            return dict([sort_ingredients[0]]), None
+            sort_ingredients = dict([sort_ingredients[0]])
+    return sort_ingredients, None
 
 
 def most_revenued_month(orders):
     dicc = {}
+    sort_ingredients = {}
     for order in orders[0]:
         date = order.pop('date', [])
-        date = date.split('-')[1]
-        total_price = order.pop('total_price', [])
-        if date not in dicc.keys():
-            dicc[date] = total_price
-        else:
-            dicc[date] = dicc[date] + total_price
-    sort_ingredients = sorted(dicc.items(), key=lambda x: x[1], reverse=True)
-    return dict([sort_ingredients[0]]), None
+        if len(date) != 0:
+            date = date.split('-')[1]
+            total_price = order.pop('total_price', [])
+            if date not in dicc.keys():
+                dicc[date] = total_price
+            else:
+                dicc[date] = dicc[date] + total_price
+            sort_ingredients = sorted(
+                dicc.items(), key=lambda x: x[1], reverse=True)
+            sort_ingredients = dict([sort_ingredients[0]])
+
+    return sort_ingredients, None
 
 
 def better_customers(orders):

@@ -1,38 +1,31 @@
 from app.common.http_methods import GET, POST, PUT
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 
 from ..controllers import BeverageController
+from ..utils.ingredient_decorator import entities_wrapper
 
 beverage = Blueprint('beverage', __name__)
 
 
 @beverage.route('/', methods=POST)
+@entities_wrapper
 def create_Beverage():
-    Beverage, error = BeverageController.create(request.json)
-    response = Beverage if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    return BeverageController.create(request.json)
 
 
 @beverage.route('/', methods=PUT)
+@entities_wrapper
 def update_Beverage():
-    Beverage, error = BeverageController.update(request.json)
-    response = Beverage if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    return BeverageController.update(request.json)
 
 
 @beverage.route('/id/<_id>', methods=GET)
+@entities_wrapper
 def get_Beverage_by_id(_id: int):
-    Beverage, error = BeverageController.get_by_id(_id)
-    response = Beverage if not error else {'error': error}
-    status_code = 200 if Beverage else 404 if not error else 400
-    return jsonify(response), status_code
+    return BeverageController.get_by_id(_id)
 
 
 @beverage.route('/', methods=GET)
+@entities_wrapper
 def get_Beverages():
-    Beverages, error = BeverageController.get_all()
-    response = Beverages if not error else {'error': error}
-    status_code = 200 if Beverages else 404 if not error else 400
-    return jsonify(response), status_code
+    return BeverageController.get_all()
