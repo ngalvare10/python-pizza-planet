@@ -1,38 +1,31 @@
 from app.common.http_methods import GET, POST, PUT
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 
 from ..controllers import SizeController
+from ..utils.ingredient_decorator import entities_wrapper
 
 size = Blueprint('size', __name__)
 
 
 @size.route('/', methods=POST)
+@entities_wrapper
 def create_size():
-    size, error = SizeController.create(request.json)
-    response = size if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    return SizeController.create(request.json)
 
 
 @size.route('/', methods=PUT)
+@entities_wrapper
 def update_size():
-    size, error = SizeController.update(request.json)
-    response = size if not error else {'error': error}
-    status_code = 200 if not error else 400
-    return jsonify(response), status_code
+    return SizeController.update(request.json)
 
 
 @size.route('/id/<_id>', methods=GET)
+@entities_wrapper
 def get_size_by_id(_id: int):
-    size, error = SizeController.get_by_id(_id)
-    response = size if not error else {'error': error}
-    status_code = 200 if size else 404 if not error else 400
-    return jsonify(response), status_code
+    return SizeController.get_by_id(_id)
 
 
 @size.route('/', methods=GET)
+@entities_wrapper
 def get_sizes():
-    size, error = SizeController.get_all()
-    response = size if not error else {'error': error}
-    status_code = 200 if size else 404 if not error else 400
-    return jsonify(response), status_code
+    return SizeController.get_all()

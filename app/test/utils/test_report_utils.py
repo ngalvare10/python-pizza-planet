@@ -59,7 +59,8 @@ def test_most_request_ingredient(app, ingredients, size, clients_report):
 
 def test_most_request_no_ingredient(app, size, clients_report):
     list_orders = __create_orders_no_ingredients(app, size=size, clients_report=clients_report)
-    pytest.assume(most_request_ingredient([list_orders])[0] == "No ingredients in orders")
+    dicc = most_request_ingredient([list_orders])
+    pytest.assume(dicc == ({},None))
 
 def test_most_revenued_month(app, ingredients, size, clients_report):
     list_orders = __create_orders(app, ingredients, size, clients_report)
