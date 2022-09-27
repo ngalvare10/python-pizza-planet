@@ -52,15 +52,13 @@ _For windows users:_
 - Install all necessary dependencies:
 
 ```bash
-pip3 install -r requirements.txt
+make install-requirements:
 ```
 
 - Start the database (Only needed for the first run):
 
 ```bash
-python3 manage.py db init
-python3 manage.py db migrate
-python3 manage.py db upgrade
+make init-database:
 ```
 
 - If you want to use the hot reload feature set FLASK_ENV before running the project:
@@ -80,35 +78,41 @@ set FLASK_ENV=development
 - Run the project with:
 
 ```bash
-python3 manage.py run
+make start
 ```
+### Extra commands in make file
 
-## Running the frontend
-
-- Clone git UI submodule
+- Run linters 
 
 ```bash
-git submodule update --init
+make run-linters
 ```
-
-- Install Live Server extension if you don't have it from [here](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) on VSCode Quick Open (`Ctrl + P`)
+- Run formatter 
 
 ```bash
-ext install ritwickdey.LiveServer
+make run-formatter
 ```
 
-- To run the frontend, start `ui/index.html` file with Live Server (Right click `Open with Live Server`)
-
-- **Important Note** You have to open vscode in the root folder of the project.
-
-- **To avoid CORS errors** start the backend before the frontend, some browsers have CORS issues otherwise
-
-### Testing the backend
-
-- Make sure that you have `pytest` installed
-
-- Run the test command
+- Run test and test coverage 
 
 ```bash
-python3 manage.py test
+make run-test-coverage
+```
+
+- See fixtures
+
+```bash
+make fixtures
+```
+
+- Seed data base
+
+```bash
+make seed-database
+```
+
+- See database seed list
+
+```bash
+make seed-database-list
 ```
